@@ -1796,10 +1796,10 @@
 </div>
 
 <!-- Category editor sheet -->
-<div class="sheet" id="categorySheet" role="dialog" aria-modal="true">
+<div class="sheet" id="locCategoryEditorSheet" role="dialog" aria-modal="true">
   <div class="sheet-handle"></div>
   <div class="sheet-header">
-    <div class="sheet-title" id="categorySheetTitle">New collection</div>
+    <div class="sheet-title" id="locCategoryEditorTitle">New collection</div>
     <button class="sheet-close" onclick="closeSheet()" aria-label="Close">×</button>
   </div>
   <span class="field-label">Pick an icon</span>
@@ -2679,9 +2679,9 @@
     $('timeSheet').classList.remove('open');
     $('placeSheet').classList.remove('open');
     $('editSheet').classList.remove('open');
-    const catSheet = $('categorySheet'); if (catSheet) catSheet.classList.remove('open');
+    $('categorySheet').classList.remove('open');
+    const locCatSheet = $('locCategoryEditorSheet'); if (locCatSheet) locCatSheet.classList.remove('open');
     const locSheet = $('locationSheet'); if (locSheet) locSheet.classList.remove('open');
-    if (typeof closeMoodCategorySheet === 'function') closeMoodCategorySheet();
     editingId = null;
     editingTab = null;
     editingCategoryId = null;
@@ -3654,12 +3654,12 @@
   function openCategoryEditor(catId) {
     editingCategoryId = catId || null;
     const cat = catId ? state.categories.find(c => c.id === catId) : null;
-    $('categorySheetTitle').textContent = cat ? 'Edit collection' : 'New collection';
+    $('locCategoryEditorTitle').textContent = cat ? 'Edit collection' : 'New collection';
     $('categoryNameInput').value = cat ? cat.name : '';
     selectedEmoji = cat ? cat.emoji : '📍';
     $('categoryDeleteBtn').style.display = cat ? 'inline-block' : 'none';
     renderEmojiPicker();
-    openSheet('categorySheet');
+    openSheet('locCategoryEditorSheet');
     setTimeout(() => $('categoryNameInput').focus(), 50);
   }
 
